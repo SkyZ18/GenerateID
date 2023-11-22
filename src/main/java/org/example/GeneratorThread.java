@@ -1,6 +1,7 @@
 package org.example;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -45,7 +46,7 @@ public class GeneratorThread extends Thread{
         }
     }
 
-    public void checkIfEmpty(List<String> lines, BufferedWriter bw) throws IOException {
+    public void checkIfEmpty(@NotNull List<String> lines, BufferedWriter bw) throws IOException {
         if (lines.isEmpty()) {
             bw.append(String.format(INIT_ID));
             lines.add(String.format(INIT_ID));
