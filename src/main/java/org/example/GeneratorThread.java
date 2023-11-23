@@ -8,13 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class GeneratorThread extends Thread{
-    private static final String LIST_OF_NUMS = "0123456789";
-    private static final String FILENAME = "savedIds.txt";
-    private static final String INIT_ID = "00000000%n";
-    private static final int LENGTH = 8;
-    private final int counter;
+public class GeneratorThread extends Thread implements Constans{
 
+    private final int counter;
     public GeneratorThread(int i) {
         this.counter = i;
     }
