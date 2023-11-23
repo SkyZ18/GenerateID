@@ -21,24 +21,17 @@ public class GeneratorThread extends Thread{
 
     @Override
     public void run() {
-        try (FileWriter fs = new FileWriter(FILENAME, true); BufferedWriter bw = new BufferedWriter(fs)) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME, true))) {
             List<String> lines = Files.readAllLines(Paths.get(FILENAME));
             checkIfEmpty(lines, bw);
-            boolean check = false;
             for (int i = 1; i <= counter; i++) {
                 String generatedId = RandomStringUtils.random(LENGTH, LIST_OF_NUMS);
-                for(String line : lines) {
-                    if (!line.matches(generatedId)) {
-                        check = true;
-                    } else {
-                        check = false;
-                        --i;
-                        break;
-                    }
-                }
-                if (check) {
+                if (!lines.contains(generatedId)) {
                     System.out.println(i + ". " + generatedId);
                     bw.append(String.format(generatedId + "%n"));
+                    lines.add(String.format(generatedId + "%n"));
+                } else {
+                    --i;
                 }
             }
         } catch (IOException e) {
